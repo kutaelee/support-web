@@ -10,4 +10,8 @@ public class Hello {
     public String test() {
         return "Hello, world!";
     }
+    @GetMapping("/dbtest")
+    public String dbtest() {
+        return "Hello, world!";
+    }
 }

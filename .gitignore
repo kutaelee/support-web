@@ -1,5 +1,7 @@
  Created by https://www.gitignore.io/api/java,maven,eclipse
 # Edit at https://www.gitignore.io/?templates=java,maven,eclipse
+# aws
+application-aws.properties
 
 ### Eclipse ###
 
