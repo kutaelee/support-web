@@ -116,15 +116,15 @@ db.properties
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-frontend/node_modules
-frontend/.pnp
+reactfront/node_modules
+reactfront/.pnp
 .pnp.js
 
 # testing
-frontend/coverage
+reactfront/coverage
 
 # production
-frontend/build
+reactfront/build
 
 # misc
 .DS_Store
