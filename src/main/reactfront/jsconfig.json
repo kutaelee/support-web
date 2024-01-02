@@ -3,7 +3,8 @@
       "baseUrl": "src",
       "paths": {
         "features/*": ["features/*"],
-        "pages/*": ["pages/*"]
+        "pages/*": ["pages/*"],
+        "assist/*": ["assist/*"]
       }
     }
   }
