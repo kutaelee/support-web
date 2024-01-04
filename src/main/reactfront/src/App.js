@@ -1,7 +1,7 @@
 // src/main/frontend/src/App.js
 
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route ,Link} from 'react-router-dom';
 import Home from 'pages/home';
 import MyPage from 'pages/mypage';
 

@@ -19,3 +19,35 @@
     src: url('assist/font/NanumGothic-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'NanumSquareLight';
+    src: url('assist/font/NanumSquareL.ttf');
+}
+@font-face {
+    font-family: 'NanumSquare';
+    src: url('assist/font/NanumSquareR.ttf');
+}
+@font-face {
+    font-family: 'NanumSquareBold';
+    src: url('assist/font/NanumSquareB.ttf');
+}
+@font-face {
+    font-family: 'NanumSquareExtraBold';
+    src: url('assist/font/NanumSquareEB.ttf');
+}
+@font-face {
+    font-family: 'NanumSquareAcb';
+    src: url('assist/font/NanumSquare_acB.ttf');
+}
+@font-face {
+    font-family: 'NanumSquareAceb';
+    src: url('assist/font/NanumSquare_acEB.ttf');
+}
+@font-face {
+    font-family: 'NanumSquareAcl';
+    src: url('assist/font/NanumSquare_acL.ttf');
+}
+@font-face {
+    font-family: 'NanumSquareAcr';
+    src: url('assist/font/NanumSquare_acR.ttf');
+}

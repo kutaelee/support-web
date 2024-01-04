@@ -9,7 +9,15 @@ module.exports = {
       fontFamily:{
         'NanumExBold': ['Nanum-ExBold'],
         'NanumRegular': ['Nanum-Regular'],
-        'NanumBold': ['Nanum-Bold']
+        'NanumBold': ['Nanum-Bold'],
+        'NanumSquare': ['NanumSquare'], 
+        'NanumSquareLight': ['NanumSquareLight'],
+        'NanumSquareBold': ['NanumSquareBold'],  
+        'NanumSquareExtraBold': ['NanumSquareExtraBold'],  
+        'NanumSquareAcb': ['NanumSquareAcb'],
+        'NanumSquareAceb': ['NanumSquareAceb'],
+        'NanumSquareAcl': ['NanumSquareAcl'],
+        'NanumSquareAcr': ['NanumSquareAcr']
       },
     
 
