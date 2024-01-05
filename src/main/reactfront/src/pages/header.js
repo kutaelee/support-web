@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import CustButton from 'component/custButton';
-import axios from 'axios';
+import MoveButton from 'component/moveButton';
+import React, { useState } from 'react';
+
+//import axios from 'axios';
 
 
 
@@ -15,7 +16,6 @@ const Header = (props) => {
   const toggleMenu = () => {
     setMenuVisibility(!isMenuVisible);
   };
-  const prevMenuName='';
 
   const toggleSubMenu = (name) => {
     setMenuList((prevMenuList) =>
@@ -46,33 +46,33 @@ const Header = (props) => {
 
 
   return (
-    <div className="h-8 bg-black">
+    <div className='h-14 bg-black'>
       <div
         className={`w-full md:w-80 h-full shadow-2xl fixed right-0 rounded-l-lg z-10 transition-opacity ${
-          !isMenuVisible ? 'bg-opacity-95' : 'opacity-0'
-        } duration-500 bg-orange-600 shadow-md shadow-orange-400`}
-        id="menu"
+          !isMenuVisible ? 'opacity-90 block' : 'opacity-0 hidden'
+        } duration-500 bg-white shadow-md shadow-white-400`}
+        id='menu'
       >
-        <div className="h-96 pt-40 select-none text-center">
+        <div className='h-96 pt-40 select-none text-center'>
     
           {menuList.map((menu, idx) => (
             <div key={menu.name} onClick={() => toggleSubMenu(menu.name)} className={` ${
-              menu.isSubMenuVisible ? 'bg-slate-50 text-orange-600':'text-white'} hover:cursor-pointer  text-2xl font-NanumSquare`}>
+              menu.isSubMenuVisible ? 'bg-gray-800 text-white':'text-black'} hover:cursor-pointer  text-2xl font-NanumSquare`}>
              <span>{menu.name}</span> 
               <div
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
             
-                className={`bg-slate-50 pt-3 text-center overflow-hidden transition-max-height ease-in-out  ${
-                  menu.isSubMenuVisible ? 'max-h-96  duration-300 opacity-100' : 'duration-300 max-h-0 opacity-0'
+                className={`bg-gray-600 pt-3 text-center overflow-hidden transition-max-height ease-in-out  ${
+                  menu.isSubMenuVisible ? 'max-h-96  duration-150 opacity-100' : 'duration-150 max-h-0 opacity-0'
                 }`}
               >
                 {menu.subMenus.map((subMenu) => (
              
-                  <a href="#" key={subMenu.name} className={`text-black hover:text-orange-600 mb-3 text-xl w-full block h-full`}>
+                  <button key={subMenu.name} className={`text-gray-400 hover:text-white mb-3 text-xl w-full block h-full`}>
                     {subMenu.name}
-                  </a>
+                  </button>
                   
                 ))}
               </div>
@@ -80,43 +80,46 @@ const Header = (props) => {
           ))}
         </div>
 
-        <div className="w-full">
-          {login ? (
-            <CustButton text="로그아웃" />
-          ) : (
-            <>
-              <CustButton text="회원가입" /> <CustButton text="로그인" />
-            </>
-          )}
-        </div>
       </div>
 
       <button
         className={`focus:outline-none ml right-8 top-3 z-20 fixed`}
         onClick={toggleMenu}
-        id="modalToggleBtn"
+        id='modalToggleBtn'
       >
         {!isMenuVisible ? (
           <>
-            <div className="bg-white my-0 transition-transform transform rotate-45 origin-top-left duration-300 rounded-md w-10 h-2"></div>
-            <div className="opacity-0 w-6 h-0.5 bg-white my-1 transition-opacity"></div>
-            <div className="bg-white my-3 transition-transform transform -rotate-45 origin-bottom-left duration-300 rounded-md w-10 h-2"></div>
+            <div className='bg-black my-0 transition-transform transform rotate-45 origin-top-left duration-300 rounded-md w-10 h-2'></div>
+            <div className='opacity-0 w-6 h-0.5 bg-black my-1 transition-opacity'></div>
+            <div className='bg-black my-3 transition-transform transform -rotate-45 origin-bottom-left duration-300 rounded-md w-10 h-2'></div>
           </>
         ) : (
           <>
-            <div className="w-8 h-1.5 rounded-md bg-white my-1 transition-transform transform -rotate-0 origin-bottom-left duration-300"></div>
-            <div className="w-8 h-1.5 rounded-md bg-white my-1"></div>
-            <div className="w-8 h-1.5 rounded-md bg-white my-1 transition-transform transform -rotate-0 origin-bottom-left duration-300"></div>
+            <div className='w-8 h-1.5 rounded-md bg-white my-1 transition-transform transform -rotate-0 origin-bottom-left duration-300'></div>
+            <div className='w-8 h-1.5 rounded-md bg-white my-1'></div>
+            <div className='w-8 h-1.5 rounded-md bg-white my-1 transition-transform transform -rotate-0 origin-bottom-left duration-300'></div>
           </>
         )}
       </button>
 
-      <div className="h-14 fixed items-center z-20 mt-2">
-        <h1 className="text-white text-2xl font-NanumExBold pl-6 hover:cursor-pointer duration-150 hover:text-orange-600" alt="main button">
+      <div className='h-14 fixed items-center z-20 mt-2'>
+        <h1 className='text-white text-2xl font-NanumExBold pl-6 hover:cursor-pointer duration-150 hover:text-orange-600' alt='main button'>
           Support .
         </h1>
       </div>
+      
+      <div className='w-full text-right pr-20 pt-4 text-white fixed'>
+      {login ? (
+            <MoveButton text='로그아웃' />
+          ) : (
+            <>
+            <MoveButton text='회원가입' location='/join' />  <MoveButton text='로그인' location='/login'  />
+            </>
+          )}
+        </div>
+
     </div>
+    
   );
 };
 
