@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 
 
-const Header = (props) => {
+const Header = () => {
 
   const [isMenuVisible, setMenuVisibility] = useState(true);
   const [menuList, setMenuList] = useState([
@@ -47,6 +47,7 @@ const Header = (props) => {
 
   return (
     <div className='h-14 bg-black'>
+      {/* menu list */}
       <div
         className={`w-full md:w-80 h-full shadow-2xl fixed right-0 rounded-l-lg z-10 transition-opacity ${
           !isMenuVisible ? 'opacity-90 block' : 'opacity-0 hidden'
@@ -55,7 +56,7 @@ const Header = (props) => {
       >
         <div className='h-96 pt-40 select-none text-center'>
     
-          {menuList.map((menu, idx) => (
+          {menuList.map((menu) => (
             <div key={menu.name} onClick={() => toggleSubMenu(menu.name)} className={` ${
               menu.isSubMenuVisible ? 'bg-gray-800 text-white':'text-black'} hover:cursor-pointer  text-2xl font-NanumSquare`}>
              <span>{menu.name}</span> 
@@ -81,7 +82,7 @@ const Header = (props) => {
         </div>
 
       </div>
-
+     {/* menu buuton */}
       <button
         className={`focus:outline-none ml right-8 top-3 z-20 fixed`}
         onClick={toggleMenu}
@@ -108,6 +109,7 @@ const Header = (props) => {
         </h1>
       </div>
       
+      {/* login menu */}
       <div className='w-full text-right pr-20 pt-4 text-white fixed'>
       {login ? (
             <MoveButton text='로그아웃' />
