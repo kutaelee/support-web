@@ -1,79 +1,111 @@
 // Join 컴포넌트
 import CustInputBox from 'component/custInputBox';
-import React, { useState , useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-
-
-
+import React, {useState, useEffect} from 'react';
+import {useForm} from 'react-hook-form';
 
 const Join = () => {
-  const [inputBoxInfo, setinputBoxInfo] = useState([
-    { label: '이름' , name: 'username' ,type: 'text', maxLength: 10 ,  pattern: '' },
-     { label: '이메일' ,  name: 'email' ,type: 'email', maxLength: 255 , pattern: '' },
-     { label: '비밀번호' , name: 'password' , type: 'text' , maxLength: 20 , pattern: '' },
-     { label: '비밀번호 확인' , name: 'confirmPassword' , type: 'text', maxLength: 20 , pattern: '' },
+    const [inputBoxInfo, setinputBoxInfo] = useState([
+        {
+            label: '이름',
+            name: 'username',
+            type: 'text',
+            maxLength: 10,
+            pattern: /^[가-힣]+$/,
+            patternMessage: '한글만 입력해주세요.'
+        }, {
+            label: '이메일',
+            name: 'email',
+            type: 'email',
+            maxLength: 255,
+            pattern: /\S+@example.co.kr$/,
+            patternMessage: '회사 이메일 형식으로 입력해주세요.'
+        }, {
+            label: '비밀번호',
+            name: 'password',
+            type: 'password',
+            maxLength: 20,
+            pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+            patternMessage: '비밀번호는 6자리 이상이며 하나 이상의 알파벳,숫자,특수문자를 포함하여야 합니다.'
+        }, {
+            label: '비밀번호 확인',
+            name: 'confirmPassword',
+            type: 'password',
+            maxLength: 20,
+            pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+            patternMessage: '비밀번호는 6자리 이상이며 하나 이상의 알파벳,숫자,특수문자를 포함하여야 합니다.'
+        }
+    ]);
+    const {register, handleSubmit, formState: {
+            errors
+        }, watch, setValue} = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+    };
 
-  ]);
-    const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm();
-    const onSubmit = data => console.log(data);
+    return (
+        <div>
+            <h2
+                className='text-white absolute w-full text-center text-3xl font-NanumExBold tracking-wider select-none'>JOIN</h2>
+            <div className='bg-black h-screen flex justify-center items-center'>
+                <div className='w-9/12 h-5/6 rounded-xl'>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        {
+                            inputBoxInfo.map((item) => (
+                                <CustInputBox
+                                    key={item.name}
+                                    label={item.label}
+                                    type={item.type}
+                                    name={item.name}
+                                    pattern={item.pattern}
+                                    maxLength={item.maxLength}
+                                    patternMessage={item.patternMessage}
+                                    formMethods={{
+                                        register,
+                                        errors,
+                                        watch,
+                                        setValue
+                                    }}/>
+                            ))
+                        }
+                        <div className='font-NanumSquare text-center'>
+                            <label
+                                htmlFor='ranks'
+                                className={`w-32 inline-block text-lg text-left ${watch('ranks')
+                                    ? 'text-white'
+                                    : 'text-gray-500'}`}>직급</label>
+                            <select
+                                name='ranks'
+                                id='ranks'
+                                className='inline-block border-white border-2 bg-black text-white w-60 text-center p-2 text-lg ml-2 mb-3 rounded-sm'
+                                {...register('ranks', { required: '필수 값 입니다.' })}>
+                                <option value=''>선택</option>
+                                <option value="pro">프로</option>
+                                <option value="manager">매니저</option>
+                                <option value="leader">팀장</option>
+                                <option value="executives">임원</option>
+                            </select>
+                            <div className='items-center flex justify-center'>
+                                <p
+                                    className={`${errors['ranks'] && errors['ranks'].type
+                                        ? 'break-keep w-1/4 text-left text-red-600'
+                                        : 'hidden'}`}>{
+                                        errors['ranks'] && errors['ranks'].type
+                                            ? errors['ranks'].message
+                                            : ''
+                                    }</p>
+                            </div>
+                        </div>
+                        <div className='text-center w-full text-white'>
+                            <button type='submit' className='pr-10'>
+                                회원가입
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log("hi")
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    
-  };
-
-  const handleJoin = () => {
-    console.log('회원가입 정보:', formData);
-    console.log('click')
-    // 서버로 데이터 전송 또는 다른 회원가입 처리 수행
-  };
-
-
-  return (
-    <div>     
-      <h2 className='text-white absolute w-full text-center text-3xl font-NanumExBold tracking-wider select-none'>JOIN</h2>
-    <div className='bg-black h-screen flex items-center justify-center'>
-         
-      <div className='w-9/12 h-5/6 rounded-xl'>
-  
-        <form onSubmit={handleSubmit(onSubmit)}>
-        {inputBoxInfo.map((item) =>(
-  
-          <CustInputBox  boxKey={item.name}
-          label={item.label}
-          type='text'
-          name='username'
-          formData={formData}
-
-          pattern= '/\S+@\S+\.\S+/'
-          maxLength={10}
-          formMethods={{ register, errors, watch, setValue }}
-       
-           />   
-        ))};
-          <div className='text-center w-full text-white'>
-          <button type='submit' className='pr-10'> 
-            회원가입
-          </button>
-          </div>
-        </form>
-      </div>
-    </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Join;
