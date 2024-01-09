@@ -13,7 +13,7 @@ const CustInputBox = (props) => {
     } = props;
 
     return (
-        <div className='text-center'>
+        <div className='text-left'>
             <label
                 htmlFor={name}
                 className={`text-gray-500 w-32 inline-block font-NanumSquare text-lg transition-colors duration-300 text-left ' ${watch(name)

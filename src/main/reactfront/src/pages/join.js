@@ -46,10 +46,11 @@ const Join = () => {
 
     return (
         <div>
-            <h2
-                className='text-white absolute w-full text-center text-3xl font-NanumExBold tracking-wider select-none'>JOIN</h2>
-            <div className='bg-black h-screen flex justify-center items-center'>
-                <div className='w-1/4 h-5/6 rounded-xl'>
+        
+            <div className='bg-black h-screen flex justify-center items-center'>   
+                <div className='w-1/4 rounded-xl'>
+                <h2
+                className='text-white block w-full text-left text-2xl font-NanumSquare font-semibold tracking-wider select-none mb-5'>회원가입</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {
                             inputBoxInfo.map((item) => (
@@ -69,7 +70,7 @@ const Join = () => {
                                     }}/>
                             ))
                         }
-                        <div className='font-NanumSquare text-center'>
+                        <div className='font-NanumSquare text-left'>
                             <label
                                 htmlFor='ranks'
                                 className={`w-32 inline-block text-lg text-left ${watch('ranks')
@@ -97,7 +98,7 @@ const Join = () => {
                                     }</p>
                             </div>
                         </div>
-                        <div className='text-right w-full pr-12 pt-2'>
+                        <div className='w-full text-center h-16 mt-2'>
                             <SuccessButton type='submit' text='회원가입'></SuccessButton>
               
                         </div>

@@ -6,6 +6,9 @@ module.exports = {
   theme: {
     
     extend: {
+      transitionProperty: {
+        'max-height': 'max-height'
+      },
       fontFamily:{
         'NanumExBold': ['Nanum-ExBold'],
         'NanumRegular': ['Nanum-Regular'],

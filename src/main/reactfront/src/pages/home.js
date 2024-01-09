@@ -6,7 +6,7 @@ const Home = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-black">
+    <div className="bg-black z-0">
       <MainGrid imgWidth="1000px" imgSrc={`${mainGrid1}`}/>
       <MainGrid imgWidth="1920px" imgSrc={`${mainGrid1}`}/>
       <MainGrid imgWidth="1024" imgSrc={`${mainGrid1}`}/>

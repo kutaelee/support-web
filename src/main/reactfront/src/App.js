@@ -7,6 +7,7 @@ import MyPage from 'pages/mypage';
 import Header from 'pages/header';
 import Footer from 'pages/footer';
 import Join from 'pages/join';
+import Login from 'pages/login';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/join' element={<Join />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/mypage' element={<MyPage />} />
       </Routes>
       <Footer />

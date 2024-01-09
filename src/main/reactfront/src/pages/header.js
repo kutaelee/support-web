@@ -47,7 +47,7 @@ const Header = () => {
 
 
   return (
-    <div className='h-14 bg-black'>
+    <div className='h-14 bg-black fixed z-10'>
       {/* menu list */}
       <div
         className={`w-full md:w-80 h-full shadow-2xl fixed right-0 rounded-l-lg z-10 transition-opacity ${
@@ -58,17 +58,18 @@ const Header = () => {
         <div className='h-96 pt-40 select-none text-center'>
     
           {menuList.map((menu) => (
-            <div key={menu.name} onClick={() => toggleSubMenu(menu.name)} className={` hover:cursor-pointer text-2xl font-NanumSquare`}>
+            <div key={menu.name} onClick={() => toggleSubMenu(menu.name)} className={`hover:cursor-pointer text-2xl font-NanumSquare`}>
              <span className={` w-full ${
-              menu.isSubMenuVisible ? 'bg-gray-800 text-white':'text-black'}  block`}>{menu.name}</span> 
+              menu.isSubMenuVisible ? 'bg-gray-950 text-white':'text-black'} tracking-wider font-semibold block`}>{menu.name}</span> 
               <div
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
             
-                className={`bg-gray-600 pt-3 text-center overflow-hidden transition-max-height ease-in-out duration-150  ${
-                  menu.isSubMenuVisible ? ' max-h-full opacity-100' : 'max-h-0 opacity-0'
+                className={`bg-gray-700 pt-3 text-center overflow-hidden  transition-max-height ease-in-out duration-300 tracking-wide ${
+                  menu.isSubMenuVisible ? 'max-h-svh opacity-100' : 'max-h-0 opacity-0'
                 }`}
+                
               >
                 {menu.subMenus.map((subMenu) => (
              
