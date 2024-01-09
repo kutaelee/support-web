@@ -1,7 +1,9 @@
 // Join 컴포넌트
+import CustButton from 'component/successButton';
 import CustInputBox from 'component/custInputBox';
 import React, {useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
+import SuccessButton from 'component/successButton';
 
 const Join = () => {
     const [inputBoxInfo, setinputBoxInfo] = useState([
@@ -47,7 +49,7 @@ const Join = () => {
             <h2
                 className='text-white absolute w-full text-center text-3xl font-NanumExBold tracking-wider select-none'>JOIN</h2>
             <div className='bg-black h-screen flex justify-center items-center'>
-                <div className='w-9/12 h-5/6 rounded-xl'>
+                <div className='w-1/4 h-5/6 rounded-xl'>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {
                             inputBoxInfo.map((item) => (
@@ -87,7 +89,7 @@ const Join = () => {
                             <div className='items-center flex justify-center'>
                                 <p
                                     className={`${errors['ranks'] && errors['ranks'].type
-                                        ? 'break-keep w-1/4 text-left text-red-600'
+                                        ? 'break-keep w-full text-left text-red-600' 
                                         : 'hidden'}`}>{
                                         errors['ranks'] && errors['ranks'].type
                                             ? errors['ranks'].message
@@ -95,10 +97,9 @@ const Join = () => {
                                     }</p>
                             </div>
                         </div>
-                        <div className='text-center w-full text-white'>
-                            <button type='submit' className='pr-10'>
-                                회원가입
-                            </button>
+                        <div className='text-right w-full pr-12 pt-2'>
+                            <SuccessButton type='submit' text='회원가입'></SuccessButton>
+              
                         </div>
                     </form>
                 </div>

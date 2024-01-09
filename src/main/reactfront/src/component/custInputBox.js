@@ -51,7 +51,7 @@ const CustInputBox = (props) => {
             <div className='items-center flex justify-center'>
                 <p
                     className={`${errors[name] && errors[name].type
-                        ? 'mb-7 break-keep w-1/4 text-left text-red-600'
+                        ? 'mb-7 break-keep w-full text-left text-red-600'
                         : 'hidden'}`}>{
                         errors[name] && errors[name].type
                             ? errors[name].message

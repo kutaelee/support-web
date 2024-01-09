@@ -1,12 +1,13 @@
 import MoveButton from 'component/moveButton';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //import axios from 'axios';
 
 
 
 const Header = () => {
-
+  const navigate = useNavigate();
   const [isMenuVisible, setMenuVisibility] = useState(true);
   const [menuList, setMenuList] = useState([
     { name: '정기점검', subMenus: [{ name: 'sub1' }, { name: 'sub2' }] },
@@ -57,16 +58,16 @@ const Header = () => {
         <div className='h-96 pt-40 select-none text-center'>
     
           {menuList.map((menu) => (
-            <div key={menu.name} onClick={() => toggleSubMenu(menu.name)} className={` ${
-              menu.isSubMenuVisible ? 'bg-gray-800 text-white':'text-black'} hover:cursor-pointer  text-2xl font-NanumSquare`}>
-             <span>{menu.name}</span> 
+            <div key={menu.name} onClick={() => toggleSubMenu(menu.name)} className={` hover:cursor-pointer text-2xl font-NanumSquare`}>
+             <span className={` w-full ${
+              menu.isSubMenuVisible ? 'bg-gray-800 text-white':'text-black'}  block`}>{menu.name}</span> 
               <div
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
             
-                className={`bg-gray-600 pt-3 text-center overflow-hidden transition-max-height ease-in-out  ${
-                  menu.isSubMenuVisible ? 'max-h-96  duration-150 opacity-100' : 'duration-150 max-h-0 opacity-0'
+                className={`bg-gray-600 pt-3 text-center overflow-hidden transition-max-height ease-in-out duration-150  ${
+                  menu.isSubMenuVisible ? ' max-h-full opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
                 {menu.subMenus.map((subMenu) => (
@@ -102,11 +103,11 @@ const Header = () => {
           </>
         )}
       </button>
-
+      {/* logo */}
       <div className='h-14 fixed items-center z-20 mt-2'>
-        <h1 className='text-white text-2xl font-NanumExBold pl-6 hover:cursor-pointer duration-150 hover:text-orange-600' alt='main button'>
+        <button onClick={()=>navigate('/')} className=' text-white text-2xl font-NanumExBold pl-6 duration-150 hover:text-orange-600' alt='main button'>
           Support .
-        </h1>
+        </button>
       </div>
       
       {/* login menu */}
