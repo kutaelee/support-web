@@ -1,5 +1,3 @@
-// Join 컴포넌트
-import CustButton from 'component/successButton';
 import CustInputBox from 'component/custInputBox';
 import React, {useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';

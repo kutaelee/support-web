@@ -10,8 +10,8 @@ const Header = () => {
   const navigate = useNavigate();
   const [isMenuVisible, setMenuVisibility] = useState(true);
   const [menuList, setMenuList] = useState([
-    { name: '정기점검', subMenus: [{ name: 'sub1' }, { name: 'sub2' }] },
-    { name: '기술지원', subMenus: [{ name: 'sub3' }, { name: 'sub4' }] },
+    { name: '정기점검', subMenus: [{ name: '점검일정',uri:'/inspection/plan' }, { name: '점검이력' , uri:'/inspection/history' }] },
+    { name: '기술지원', subMenus: [{ name: '지원보고서' , uri:'/support/report' }, { name: '지원이력' ,uri:'/support/history' }] },
   ]);
 
   const toggleMenu = () => {
@@ -73,9 +73,9 @@ const Header = () => {
               >
                 {menu.subMenus.map((subMenu) => (
              
-                  <button key={subMenu.name} className={`text-gray-400 hover:text-white mb-3 text-xl w-full block h-full`}>
+                  <MoveButton text={subMenu.name} location={subMenu.uri} key={subMenu.name} className={`text-gray-400 hover:text-white mb-3 text-xl w-full block h-full`}>
                     {subMenu.name}
-                  </button>
+                  </MoveButton>
                   
                 ))}
               </div>

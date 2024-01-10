@@ -1,0 +1,19 @@
+.swiper-pagination-bullet {
+    background: red;
+    padding: 7px;
+
+  }
+  .swiper-pagination-bullet-active {
+    background: #E3570C;
+  }
+.swiper-slide{
+    user-select: none;
+}
+.swiper-button-prev{
+    font-weight: 900;
+    color:#E3570C;
+}
+.swiper-button-next{
+    font-weight: 900;
+    color:#E3570C;
+}

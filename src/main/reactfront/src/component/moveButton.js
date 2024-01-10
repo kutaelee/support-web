@@ -11,7 +11,7 @@ const MoveButton = (props) => {
       navigate(props.location);
     };
     return (<div className="inline z-50">
-        <button onClick={movePage} className="mr-5 font-NanumSquare">{props.text}</button>
+        <button onClick={movePage} className={`mr-5 font-NanumSquare ${props.className}`}>{props.text}</button>
     </div>);
 };
 

@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainGrid from 'component/mainGrid';
 import mainGrid1 from 'assist/img/supportGrid.png';

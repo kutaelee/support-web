@@ -2,12 +2,17 @@
 
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from 'pages/home';
-import MyPage from 'pages/mypage';
-import Header from 'pages/header';
-import Footer from 'pages/footer';
-import Join from 'pages/join';
-import Login from 'pages/login';
+import Home from 'pages/common/home';
+import MyPage from 'pages/common/mypage';
+import Header from 'pages/common/header';
+import Footer from 'pages/common/footer';
+import Join from 'pages/common/join';
+import Login from 'pages/common/login';
+import InspectionPlan from 'pages/inspection/plan';
+import InspectionHistory from 'pages/inspection/history';
+import SupportReport from 'pages/support/report';
+import SupportHistory from 'pages/support/history';
+
 
 function App() {
   return (
@@ -19,6 +24,10 @@ function App() {
         <Route path='/join' element={<Join />} />
         <Route path='/login' element={<Login />} />
         <Route path='/mypage' element={<MyPage />} />
+        <Route path='/inspection/plan' element={<InspectionPlan/>} />
+        <Route path='/inspection/history' element={<InspectionHistory />} />
+        <Route path='/support/report' element={<SupportReport />} />
+        <Route path='/support/history' element={<SupportHistory />} />
       </Routes>
       <Footer />
     </BrowserRouter>
