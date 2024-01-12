@@ -3,8 +3,8 @@ import CustCalendar from 'component/custCalendar';
 const InspectionPlan = (props) => {
 
   return (
-    <div className="bg-black h-screen w-full">
-
+    <div className="bg-black w-full">
+      <CustCalendar></CustCalendar>
     </div>
   );
 };
