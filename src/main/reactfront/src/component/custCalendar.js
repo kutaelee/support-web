@@ -1,5 +1,3 @@
-// CustCalendar.js
-
 import React, { useState, useRef } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -14,7 +12,7 @@ const CustCalendar = () => {
   const [events, setEvents] = useState([
     { id: '1', title: '이벤트 1', date: '2024-01-12' },
     { id: '2', title: '이벤트 2', date: '2024-01-15' },
-    { id: '3', title: '이벤트 3', date: null }, // 날짜가 없는 이벤트
+    { id: '3', title: '이벤트 3', date: null },
   ]);
   const calendarRef = useRef(null);
 
@@ -29,24 +27,14 @@ const CustCalendar = () => {
 
   const handleModalSave = (newDate, newText) => {
     if (selectedEvent) {
-      console.log(`이벤트의 새로운 날짜: ${newDate}`);
-      console.log(`이벤트의 새로운 텍스트: ${newText}`);
-
-      // events 상태를 업데이트
-      const updatedEvents = events.map((event) => {
-        if (event.id === selectedEvent.id) {
-          return {
-            ...event,
-            date: newDate,
-            title: newText,
-          };
-        }
-        return event;
-      });
+      const updatedEvents = events.map((event) =>
+        event.id === selectedEvent.id
+          ? { ...event, date: newDate, title: newText }
+          : event
+      );
 
       setEvents(updatedEvents);
 
-      // FullCalendar에 변경된 이벤트를 반영
       const calendarApi = calendarRef.current.getApi();
       const existingEvent = calendarApi.getEventById(selectedEvent.id);
 
@@ -55,47 +43,55 @@ const CustCalendar = () => {
         existingEvent.setStart(newDate);
       }
     }
-    handleModalClose(); // 모달 닫기
+    handleModalClose();
   };
 
-  const handleDragStart = (event, jsEvent) => {
-    // 드래그가 시작될 때 실행되는 로직
-    console.log('드래그 시작:', event);
+  const handleEventDrop = (info) => {
+    console.log('드롭한 날짜:', info.event.start);
   };
 
-  const handleDragEnd = (event, jsEvent) => {
-    // 드래그가 종료될 때 실행되는 로직
-    console.log('드래그 종료:', jsEvent);
-    
-  };
-
-  const handleEventDrop = (updatedEvents) => {
-    // 풀캘린더의 events 상태를 업데이트
+  const handleDrop = (e) => {
+    e.preventDefault();
+  
+    const calendarApi = calendarRef.current.getApi();
+    const eventId = e.dataTransfer.getData('text/plain');
+    const draggedEl = document.getElementById(eventId);
+  
+    // 이벤트 엘리먼트의 날짜 가져오기
+    const date = calendarApi.getDate(draggedEl);
+  
+    const updatedEvents = events.map((ev) =>
+      ev.id === eventId ? { ...ev, date: date ? date.toISOString() : null } : ev
+    );
+  
     setEvents(updatedEvents);
-    console.log('드롭한 날짜:', updatedEvents.date);
+  
+    // handleEventDrop을 호출하여 부모 컴포넌트에 업데이트된 이벤트를 전달
+    handleEventDrop({ event: { start: date } });
   };
 
   const calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     className: 'custom-calendar',
     initialView: 'dayGridMonth',
-    events: events.filter((event) => !!event.date), // 날짜가 있는 이벤트만 표시
+    events: events.filter((event) => !!event.date),
     editable: true,
     eventClick: handleEventClick,
+    eventDrop: handleEventDrop,
+    droppable: true,
   };
 
   return (
     <div>
-    <div className='pt-10 w-3/4 h-5/6 inline-block'>
-      <h2>나만의 캘린더</h2>
-      <div className="calendar-container">
-        <FullCalendar {...calendarOptions} ref={calendarRef} />
-        <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} />
+      <div className='pt-10 w-3/4 h-5/6 inline-block'>
+        <h2>나만의 캘린더</h2>
+        <div className="calendar-container" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
+          <FullCalendar {...calendarOptions} ref={calendarRef} />
+          <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} />
+        </div>
       </div>
-     
+      <ListBox handleDrop={handleDrop} onEventDrop={handleEventDrop} events={events} setEvents={setEvents} calendarRef={calendarRef} />
     </div>
-     <ListBox onDragStart={handleDragStart} onDragEnd={handleDragEnd} onEventDrop={handleEventDrop} events={events} />
-     </div>
   );
 };
 
