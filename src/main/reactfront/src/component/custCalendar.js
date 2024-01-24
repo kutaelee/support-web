@@ -5,6 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import EventModal from 'component/calendarEventModal';
 import ListBox from 'component/listBox';
 import 'assist/css/customCalendar.css';
+import koLocale from '@fullcalendar/core/locales/ko';
 
 const CustCalendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,28 +47,24 @@ const CustCalendar = () => {
     handleModalClose();
   };
 
-  const handleEventDrop = (info) => {
-    console.log('드롭한 날짜:', info.event.start);
-  };
+  const handleEventReceive = (info) => {
+    console.log(info.event.id)
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-  
-    const calendarApi = calendarRef.current.getApi();
-    const eventId = e.dataTransfer.getData('text/plain');
-    const draggedEl = document.getElementById(eventId);
-  
-    // 이벤트 엘리먼트의 날짜 가져오기
-    const date = calendarApi.getDate(draggedEl);
-  
-    const updatedEvents = events.map((ev) =>
-      ev.id === eventId ? { ...ev, date: date ? date.toISOString() : null } : ev
-    );
-  
+    const timezoneOffset = new Date().getTimezoneOffset() * 60000;
+    const startDate = new Date(info.event.start-timezoneOffset);
+
+    
+    // 원하는 작업 수행
+    console.log('Received event start date:', startDate.toISOString().slice(0, 10));
+    const updatedEvents = events.map((event) =>
+    event.id === info.event.id
+      ? { ...event, date: startDate.toISOString().slice(0, 10) }
+      : event
+  );
+
     setEvents(updatedEvents);
-  
-    // handleEventDrop을 호출하여 부모 컴포넌트에 업데이트된 이벤트를 전달
-    handleEventDrop({ event: { start: date } });
+    console.log(events)
+
   };
 
   const calendarOptions = {
@@ -77,20 +74,22 @@ const CustCalendar = () => {
     events: events.filter((event) => !!event.date),
     editable: true,
     eventClick: handleEventClick,
-    eventDrop: handleEventDrop,
     droppable: true,
+    eventReceive: handleEventReceive,
+    locale: koLocale
   };
 
   return (
     <div>
       <div className='pt-10 w-3/4 h-5/6 inline-block'>
         <h2>나만의 캘린더</h2>
-        <div className="calendar-container" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
+        <div className="calendar-container"  onDragOver={(e) => e.preventDefault()}>
           <FullCalendar {...calendarOptions} ref={calendarRef} />
           <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} />
         </div>
       </div>
-      <ListBox handleDrop={handleDrop} onEventDrop={handleEventDrop} events={events} setEvents={setEvents} calendarRef={calendarRef} />
+      
+      <ListBox events={events} setEvents={setEvents} calendarRef={calendarRef}  />
     </div>
   );
 };

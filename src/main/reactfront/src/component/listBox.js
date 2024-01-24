@@ -1,29 +1,33 @@
-const ListBox = ({ events, setEvents, calendarRef, handleEventDrop }) => {
-  const handleDragStart = (event, e) => {
-    e.dataTransfer.setData('text/plain', event.id);
-  };
+import React, { useRef, useEffect } from 'react';
+import { Draggable } from '@fullcalendar/interaction';
 
-  const handleDrop = (e) => {
-    e.preventDefault();
+const DraggableListBoxItem = ({eventData}) => {
+  const externalEventRef = useRef(null);
 
-    const calendarApi = calendarRef.current.getApi();
-    const { x, y } = e;
-    const date = calendarApi.getDateFromEventProps({ x, y, type: 'drag' });
+  useEffect(() => {
+    const externalDraggable = new Draggable(externalEventRef.current, {
+      eventData: () => ({ title: eventData.title , id: eventData.id }),   
+    });
 
-    const eventId = e.dataTransfer.getData('text/plain');
-    const updatedEvents = events.map((ev) =>
-      ev.id === eventId ? { ...ev, date: date ? date.toISOString() : null } : ev
-    );
+    // 컴포넌트가 언마운트될 때 Draggable 인스턴스를 소멸시킵니다.
+    return () => {
+      externalDraggable.destroy();
+    };
+  }, [eventData]);
 
-    setEvents(updatedEvents);
+  return (
+    <li
+    className='fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event'
+      ref={externalEventRef}
+      data-event={JSON.stringify(eventData)}
+      draggable='true'
+    >
+      {eventData.title}
+    </li>
+  );
+};
 
-    // handleEventDrop을 호출하여 부모 컴포넌트에 업데이트된 이벤트를 전달
-    handleEventDrop({ event: { start: date } });
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+const ListBox = ({ events }) => {
 
   return (
     <div className='inline-block w-1/5 h-5/6 absolute ml-12 mt-32 bg-gray-600'>
@@ -34,15 +38,11 @@ const ListBox = ({ events, setEvents, calendarRef, handleEventDrop }) => {
         {events.map(
           (event) =>
             event.date == null && (
-              <li
+              <DraggableListBoxItem
                 key={event.id}
-                draggable
-                onDragStart={(e) => handleDragStart(event, e)}
-                onDrop={(e) => handleDrop(e)}
-                onDragOver={handleDragOver}
-              >
-                {event.title}
-              </li>
+                eventData={event}
+
+              />
             )
         )}
       </ul>

@@ -8,8 +8,8 @@ const CalendarEventModal = ({ isOpen, onClose, onSave, initialEvent }) => {
   useEffect(() => {
     // 초기 이벤트가 변경될 때마다 날짜와 텍스트를 업데이트
     if (initialEvent) {
-      const newDateWithMillis = new Date(initialEvent.startStr).toISOString().slice(0, 10); // UTC 시간으로 변환하고 날짜 포맷 조절
-      setNewDate(newDateWithMillis);
+      const newDateWithMillis = new Date(initialEvent.startStr);
+      setNewDate(newDateWithMillis.toISOString().slice(0, 10));
       setNewText(initialEvent.title || ''); // 이벤트에 설명이 있는 경우 표시
     }
   }, [initialEvent]);
