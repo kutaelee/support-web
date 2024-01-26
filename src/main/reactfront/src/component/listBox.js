@@ -19,7 +19,6 @@ const DraggableListBoxItem = ({eventData}) => {
     <li
     className='fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event'
       ref={externalEventRef}
-      data-event={JSON.stringify(eventData)}
       draggable='true'
     >
       {eventData.title}
@@ -27,21 +26,25 @@ const DraggableListBoxItem = ({eventData}) => {
   );
 };
 
+
 const ListBox = ({ events }) => {
 
+const handleDragOver = (e) => {
+  e.preventDefault(); // 이 부분이 추가되어야 합니다.
+};
+
   return (
-    <div className='inline-block w-1/5 h-5/6 absolute ml-12 mt-32 bg-gray-600'>
+    <div className='inline-block w-1/5 h-5/6 absolute ml-12 mt-32 bg-gray-600'  onDragOver={handleDragOver} draggable='true'>
       <h2 className='p-3 text-center bg-gray-700 rounded-md h-14 font-NanumSquare tracking-wider text-xl font-semibold text-neutral-100'>
         일정 목록
       </h2>
       <ul>
         {events.map(
           (event) =>
-            event.date == null && (
+            !event.date && (
               <DraggableListBoxItem
                 key={event.id}
                 eventData={event}
-
               />
             )
         )}

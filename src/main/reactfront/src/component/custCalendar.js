@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -15,9 +15,14 @@ const CustCalendar = () => {
     { id: '2', title: '이벤트 2', date: '2024-01-15' },
     { id: '3', title: '이벤트 3', date: null },
   ]);
+  useEffect(()=>{
+    console.log(events)
+  })
   const calendarRef = useRef(null);
 
   const handleEventClick = (info) => {
+    info.jsEvent.preventDefault();
+    console.log(info.event)
     setSelectedEvent(info.event);
     setModalOpen(true);
   };
@@ -63,10 +68,17 @@ const CustCalendar = () => {
   );
 
     setEvents(updatedEvents);
-    console.log(events)
+
 
   };
 
+
+  const handleEventDragStop = (info) => {
+    const jsEvent = info.jsEvent;
+
+    // 원하는 작업 수행
+    console.log('Dragged event:', jsEvent);
+  };
   const calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     className: 'custom-calendar',
@@ -76,20 +88,20 @@ const CustCalendar = () => {
     eventClick: handleEventClick,
     droppable: true,
     eventReceive: handleEventReceive,
-    locale: koLocale
+    locale: koLocale,
+    eventDragStop: handleEventDragStop
   };
 
   return (
     <div>
       <div className='pt-10 w-3/4 h-5/6 inline-block'>
         <h2>나만의 캘린더</h2>
-        <div className="calendar-container"  onDragOver={(e) => e.preventDefault()}>
+        <div className="calendar-container" >
           <FullCalendar {...calendarOptions} ref={calendarRef} />
           <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} />
         </div>
       </div>
-      
-      <ListBox events={events} setEvents={setEvents} calendarRef={calendarRef}  />
+      <ListBox events={events} setEvents={setEvents} calendarRef={calendarRef} />
     </div>
   );
 };
