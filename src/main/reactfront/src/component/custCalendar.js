@@ -6,6 +6,7 @@ import EventModal from 'component/calendarEventModal';
 import ListBox from 'component/listBox';
 import 'assist/css/customCalendar.css';
 import koLocale from '@fullcalendar/core/locales/ko';
+import UserSelectBox from './userSelectBox';
 
 const CustCalendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -94,12 +95,13 @@ const CustCalendar = () => {
   return (
     <div>
       <div className='pt-10 w-3/4 h-5/6 inline-block'>
-        <h2>나만의 캘린더</h2>
+      <UserSelectBox />
         <div className="calendar-container" >
           <FullCalendar {...calendarOptions} ref={calendarRef} />
           <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} onEventDelete={onEventDelete} />
         </div>
       </div>
+
       <ListBox events={events} setEvents={setEvents} calendarRef={calendarRef} />
     </div>
   );
