@@ -12,9 +12,9 @@ const CustCalendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([
-    { id: '1', title: '이벤트 1', date: '2024-02-12' , description:'설명 블라블라'},
-    { id: '2', title: '이벤트 2', date: '2024-02-15' , description:'설명 블라블라'},
-    { id: '3', title: '이벤트 3', date: null , description:''},
+    {name:'이규태', id: '1', title: '이벤트 1', date: '2024-02-12' , description:'설명 블라블라', view:true},
+    {name:'홍길동', id: '2', title: '이벤트 2', date: '2024-02-15' , description:'설명 블라블라', view:true},
+    {name:'김메타', id: '3', title: '이벤트 3', date: null , description:'', view:true},
   ]);
   useEffect(()=>{
     console.log(events)
@@ -76,7 +76,7 @@ const CustCalendar = () => {
     plugins: [dayGridPlugin, interactionPlugin],
     className: 'custom-calendar',
     initialView: 'dayGridMonth',
-    events: events.filter((event) => !!event.date),
+    events: events.filter((event) => !!event.date && !!event.view),
     editable: true,
     eventClick: handleEventClick,
     droppable: true,
@@ -92,10 +92,20 @@ const CustCalendar = () => {
     existingEvent.remove();
     console.log(id)
   }
+
+  const onUserSelectedChange=(name ,checked) =>{
+      const updatedEvents = events.map((event) =>
+      event.name === name
+        ? { ...event, view:checked}
+        : event
+    );
+    setEvents(updatedEvents);
+   
+  }
   return (
     <div>
       <div className='pt-10 w-3/4 h-5/6 inline-block'>
-      <UserSelectBox />
+      <UserSelectBox onUserSelectedChange={onUserSelectedChange}/>
         <div className="calendar-container" >
           <FullCalendar {...calendarOptions} ref={calendarRef} />
           <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} onEventDelete={onEventDelete} />
