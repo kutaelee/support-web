@@ -9,7 +9,7 @@ const DraggableListBoxItem = ({eventData}) => {
       eventData: () => ({ title: eventData.title , id: eventData.id }),   
     });
 
-    // 컴포넌트가 언마운트될 때 Draggable 인스턴스를 소멸시킵니다.
+   
     return () => {
       externalDraggable.destroy();
     };
@@ -30,7 +30,7 @@ const DraggableListBoxItem = ({eventData}) => {
 const ListBox = ({ events }) => {
 
 const handleDragOver = (e) => {
-  e.preventDefault(); // 이 부분이 추가되어야 합니다.
+  e.preventDefault(); 
 };
 
   return (

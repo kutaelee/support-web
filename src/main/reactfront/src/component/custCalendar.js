@@ -11,9 +11,9 @@ const CustCalendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([
-    { id: '1', title: '이벤트 1', date: '2024-01-12' },
-    { id: '2', title: '이벤트 2', date: '2024-01-15' },
-    { id: '3', title: '이벤트 3', date: null },
+    { id: '1', title: '이벤트 1', date: '2024-02-12' , description:'설명 블라블라'},
+    { id: '2', title: '이벤트 2', date: '2024-02-15' , description:'설명 블라블라'},
+    { id: '3', title: '이벤트 3', date: null , description:''},
   ]);
   useEffect(()=>{
     console.log(events)
@@ -31,23 +31,15 @@ const CustCalendar = () => {
     setModalOpen(false);
   };
 
-  const handleModalSave = (newDate, newText) => {
+  const handleModalSave = (newDate, newText, newDescription) => {
     if (selectedEvent) {
       const updatedEvents = events.map((event) =>
         event.id === selectedEvent.id
-          ? { ...event, date: newDate, title: newText }
+          ? { ...event, date: newDate, title: newText, description: newDescription}
           : event
       );
 
       setEvents(updatedEvents);
-
-      const calendarApi = calendarRef.current.getApi();
-      const existingEvent = calendarApi.getEventById(selectedEvent.id);
-
-      if (existingEvent) {
-        existingEvent.setProp('title', newText);
-        existingEvent.setStart(newDate);
-      }
     }
     handleModalClose();
   };
@@ -92,13 +84,20 @@ const CustCalendar = () => {
     eventDragStop: handleEventDragStop
   };
 
+  const onEventDelete=(id) =>{
+    //axios로 db에서 삭제 후 promise로 풀캘린더에서 삭제
+    const calendarApi = calendarRef.current.getApi();
+    const existingEvent = calendarApi.getEventById(id);
+    existingEvent.remove();
+    console.log(id)
+  }
   return (
     <div>
       <div className='pt-10 w-3/4 h-5/6 inline-block'>
         <h2>나만의 캘린더</h2>
         <div className="calendar-container" >
           <FullCalendar {...calendarOptions} ref={calendarRef} />
-          <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} />
+          <EventModal isOpen={modalOpen} onClose={handleModalClose} onSave={handleModalSave} initialEvent={selectedEvent} onEventDelete={onEventDelete} />
         </div>
       </div>
       <ListBox events={events} setEvents={setEvents} calendarRef={calendarRef} />
