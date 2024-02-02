@@ -8,7 +8,6 @@ const CalendarEventModal = ({isOpen, onClose, onSave, initialEvent, onEventDelet
     const [selectedEventId, setSelectedEventId] =useState('');
 
     useEffect(() => {
-      console.log(initialEvent)
         if (initialEvent) {
             const newDateWithMillis = new Date(initialEvent.startStr);
             setNewDate(newDateWithMillis.toISOString().slice(0, 10));
@@ -28,7 +27,7 @@ const CalendarEventModal = ({isOpen, onClose, onSave, initialEvent, onEventDelet
   };
     return (
         <div
-            className={`w-1/4 h-2/4 bg-gray-600 opacity-95 z-10 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${isOpen
+            className={`w-1/4 h-2/4 bg-gray-600 opacity-95 z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${isOpen
                 ? 'block'
                 : 'hidden'}`}>
             <div className='modal-content shadow-md p-4 h-full'>
@@ -62,7 +61,7 @@ const CalendarEventModal = ({isOpen, onClose, onSave, initialEvent, onEventDelet
                 </label>
                 <div className='flex justify-center'>
                 <button
-                    className='bg-blue-500 text-white px-4 py-2 rounded mr-2'
+                    className='bg-orange-600 text-white px-4 py-2 rounded mr-2'
                     onClick={handleSave}>저장</button>
 
                 <button

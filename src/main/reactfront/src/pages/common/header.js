@@ -10,7 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [isMenuVisible, setMenuVisibility] = useState(true);
   const [menuList, setMenuList] = useState([
-    { name: '정기점검', subMenus: [{ name: '점검일정',uri:'/inspection/plan' }, { name: '점검이력' , uri:'/inspection/history' }] },
+    { name: '정기점검', subMenus: [{ name: '점검일정',uri:'/inspection/plan' }, { name: '점검관리' , uri:'/inspection/management' }] },
     { name: '기술지원', subMenus: [{ name: '지원보고서' , uri:'/support/report' }, { name: '지원이력' ,uri:'/support/history' }] },
   ]);
 
@@ -47,7 +47,7 @@ const Header = () => {
 
 
   return (
-    <div className='h-14 bg-black fixed z-10'>
+    <div className='h-14 bg-black sticky z-10'>
       {/* menu list */}
       <div
         className={`w-full md:w-80 h-full shadow-2xl fixed right-0 rounded-l-lg z-10 transition-opacity ${

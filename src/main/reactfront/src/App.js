@@ -9,7 +9,7 @@ import Footer from 'pages/common/footer';
 import Join from 'pages/common/join';
 import Login from 'pages/common/login';
 import InspectionPlan from 'pages/inspection/plan';
-import InspectionHistory from 'pages/inspection/history';
+import InspectionManagement from 'pages/inspection/management';
 import SupportReport from 'pages/support/report';
 import SupportHistory from 'pages/support/history';
 
@@ -25,7 +25,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/inspection/plan' element={<InspectionPlan/>} />
-        <Route path='/inspection/history' element={<InspectionHistory />} />
+        <Route path='/inspection/management' element={<InspectionManagement />} />
         <Route path='/support/report' element={<SupportReport />} />
         <Route path='/support/history' element={<SupportHistory />} />
       </Routes>

@@ -2,9 +2,9 @@ import React,{useState} from 'react';
 
 const UserSelectBox = ({onUserSelectedChange}) => {
     const [users, setUsers] = useState([
-        {name:'이규태'},
-        {name:'홍길동'},
-        {name:'김메타'},
+        {name:'이규태' , color:'red'},
+        {name:'홍길동' , color:'teal'},
+        {name:'김메타' , color:'orange'},
     ]);
 
 
@@ -21,7 +21,7 @@ const UserSelectBox = ({onUserSelectedChange}) => {
            
           <label key={user.name} className='ml-5'>
           <input
-              className='mr-1'
+              className={`mr-1 accent-${user.color}-500 `}
               type='checkbox'
               id={user.name}
               defaultChecked={true}

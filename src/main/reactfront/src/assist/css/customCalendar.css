@@ -23,3 +23,16 @@ input{
 textarea{
     color:black;
 }
+.fc-daygrid-day-bottom{
+    color: white;
+}
+.fc .fc-popover{
+    z-index: 5;
+    background-color: black;
+    color:white;
+}
+.fc-daygrid-more-link{
+    background-color: rgb(69, 72, 75);
+    width: 100%;
+    text-align: center;
+}
