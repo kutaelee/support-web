@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Table from 'component/table';
 import Pagination from 'component/pagination';
-
+import Search from 'component/search'
 const InspectionManagement = () => {
   // 로컬 데이터 예시
   const localData = [
@@ -15,7 +15,7 @@ const InspectionManagement = () => {
     { id: 7, title: '사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
     { id: 8, title: '사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
     { id: 9, title: '사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
-    { id: 10, title: '사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
+    { id: 10, title: '사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
     { id: 11, title: '사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
     { id: 12, title: '사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
     { id: 13, title: '사이트 1', checkType: '정기', manager: '담당자1', registrationDate: '2022-01-01', registrant: '등록자1' },
@@ -46,6 +46,7 @@ const InspectionManagement = () => {
 
   return (
     <div className='h-screen bg-black text-white font-NanumSquare'>
+        <Search />
       <Table columns={columns} data={currentData} />
       <Pagination pageCount={Math.ceil(localData.length / itemsPerPage)} onPageChange={handlePageChange} />
     </div>

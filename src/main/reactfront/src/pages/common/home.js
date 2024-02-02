@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainGrid from 'component/mainGrid';
-import mainGrid1 from 'assist/img/supportGrid.png';
+import mainGrid1 from 'assist/img/maingrid1.png';
 const Home = (props) => {
   const navigate = useNavigate();
 

@@ -12,11 +12,11 @@ const Table = ({ columns, data }) => {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className='bg-gray-700'>
           {data.map((row) => (
-            <tr className='bg-gray-700' key={row.id}>
+            <tr className=' cursor-pointer hover:bg-neutral-100 hover:text-black' key={row.id}>
               {columns.map((column) => (
-                <td className='h-1' key={column.accessor}>{row[column.accessor]}</td>
+                <td className='h-1 px-2 max-w-96 whitespace-nowrap overflow-hidden text-ellipsis' key={column.accessor}>{row[column.accessor]}</td>
               ))}
             </tr>
           ))}

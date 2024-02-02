@@ -17,7 +17,8 @@ const DraggableListBoxItem = ({eventData}) => {
 
   return (
     <li
-      className={`fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event bg-${eventData.backgroundColor}-500 border-${eventData.borderColor}-500 `}
+      className='fc-event fc-event-draggable fc-event-resizable fc-event-start fc-event-end fc-event-past fc-daygrid-event fc-daygrid-block-event fc-h-event'
+      style={{ background: eventData.backgroundColor , borderColor:eventData.borderColor}}
       ref={externalEventRef}
       draggable='true'
     >

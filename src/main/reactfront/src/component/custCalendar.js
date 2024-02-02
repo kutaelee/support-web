@@ -114,7 +114,7 @@ const CustCalendar = () => {
   }
   return (
     <div>
-      <div className=' h-screen w-3/4 inline-block ml-5 font-NanumSquare'>
+      <div className='h-screen w-3/4 inline-block ml-5 font-NanumSquare'>
       <UserSelectBox onUserSelectedChange={onUserSelectedChange}/>
         <div className='calendar-container'>
           <FullCalendar {...calendarOptions} ref={calendarRef} />

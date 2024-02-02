@@ -18,11 +18,11 @@ const UserSelectBox = ({onUserSelectedChange}) => {
 
             {users.map(
           (user) =>
-           
-          <label key={user.name} className='ml-5'>
+          <label key={user.name} className='ml-5 select-none'>
           <input
-              className={`mr-1 accent-${user.color}-500 `}
+              className={`mr-1 `}
               type='checkbox'
+              style={{ accentColor: user.color }}
               id={user.name}
               defaultChecked={true}
               onChange={(e) => handleCheckboxChange(user.name , e.target.checked)}

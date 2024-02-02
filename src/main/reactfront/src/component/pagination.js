@@ -7,7 +7,7 @@ const Pagination = ({ pageCount, onPageChange }) => {
   return (
     <div className='w-full'>
     <ReactPaginate
-      pageCount={200}
+      pageCount={pageCount}
       onPageChange={onPageChange}
       containerClassName="pagination text-center"
       pageClassName="mx-2 rounded text-center w-10 text-xl "
