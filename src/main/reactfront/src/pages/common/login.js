@@ -28,7 +28,7 @@ const Login = () => {
             />
           </div>
           <div className='mb-4'>
-            <label htmlFor='password' className='block text-gray-600 text-sm font-NanumSquare mb-2'>
+            <label htmlFor='password' className={`block text-gray-600 text-sm font-NanumSquare mb-2 ${watch('password') ? 'text-white' : 'text-gray-600'}`}>
               비밀번호
             </label>
             <input
@@ -36,7 +36,7 @@ const Login = () => {
               id='password'
               name='password'
               {...register('password')}
-              className='w-full p-2 border border-gray-300 rounded-md bg-black text-white'
+              className='w-full p-2 border font-NanumRegular border-gray-300 rounded-md bg-black text-white'
               placeholder='비밀번호를 입력하세요.'
             />
           </div>
